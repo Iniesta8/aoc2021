@@ -5,27 +5,17 @@ def parse_input():
     boards = []
     with open("./input") as f:
         numbers = [int(n) for n in f.readline().strip().split(',')]
-        lines = [line.strip() for line in f if line != '\n']
+        lines = [l for l in f.readlines() if l.strip()]
 
-        count = 0
         board = []
         for l in lines:
             row = [int(r) for r in l.split()]
-
             board.append(row)
-            count += 1
-
-            if count == len(row):
+            if len(board) == len(row):
                 boards.append(board)
-                count = 0
                 board = []
 
     return numbers, boards
-
-
-def print_board(board):
-    for row in board:
-        print(row)
 
 
 def board_won(board):
@@ -41,14 +31,7 @@ def board_won(board):
 
 
 def calc_score(board, winning_num):
-    score = 0
-
-    for row in board:
-        for e in row:
-            if e != 'X':
-                score += e
-
-    return score * winning_num
+    return sum([e for row in board for e in row if e != 'X']) * winning_num
 
 
 def mark_number(board, num):
@@ -72,7 +55,6 @@ def part2(boards, nums):
 
     for cur_num in nums:
         for i, b in enumerate(boards):
-
             if i in won_boards:
                 continue
 
