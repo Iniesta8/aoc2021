@@ -3,61 +3,49 @@
 
 def parse_input():
     with open("./input") as f:
-        lines = [l.strip() for l in f.readlines()]
+        data = [l.strip() for l in f.readlines()]
 
-        coords = []
-        for line in lines:
+        lines = []
+        for line in data:
             src, dst = line.split("->")
             x1, y1 = src.strip().split(",")
             x2, y2 = dst.strip().split(",")
-            coords.append([[int(x1), int(y1)], [int(x2), int(y2)]])
+            lines.append([[int(x1), int(y1)], [int(x2), int(y2)]])
 
-        return coords
+        return lines
 
 
-def get_covered_points_count(coords, part1):
-    cps = dict()
+def get_covered_points_count(lines, diagonals):
+    cpc = dict()
 
-    for coord in coords:
-        src = coord[0]
-        dst = coord[1]
+    for l in lines:
+        src, dst = l[0], l[1]
+        dv_x, dv_y = [dst[0] - src[0], dst[1] - src[1]]
 
-        dv = [dst[0] - src[0], dst[1] - src[1]]
-
-        if part1 and dv[0] != 0 and dv[1] != 0:
+        if diagonals and dv_x != 0 and dv_y != 0:
             continue
 
-        ndv = [0 if dv[0] == 0 else int(dv[0] /
-                                        abs(dv[0])), 0 if dv[1] == 0 else int(dv[1] / abs(dv[1]))]
-
-        n = abs(dv[0]) if dv[0] != 0 else abs(dv[1])
-        tmp = list(src)
+        sv_x = 0 if dv_x == 0 else int(dv_x / abs(dv_x))
+        sv_y = 0 if dv_y == 0 else int(dv_y / abs(dv_y))
+        n = abs(dv_x) if dv_x != 0 else abs(dv_y)
+        tmp_x, tmp_y = list(src)
         while n >= 0:
-            tmp_key = (tmp[0], tmp[1])
-            if tmp_key not in cps:
-                cps[tmp_key] = 1
-            else:
-                cps[tmp_key] += 1
-            tmp[0] += ndv[0]
-            tmp[1] += ndv[1]
+            tmp = (tmp_x, tmp_y)
+            cpc[tmp] = cpc.get(tmp, 0) + 1
+            tmp_x += sv_x
+            tmp_y += sv_y
             n -= 1
 
-    return cps
+    return cpc
 
 
-def solve(coords, p1):
-    cps = get_covered_points_count(coords, p1)
-
-    ans = 0
-    for c in cps.values():
-        if c >= 2:
-            ans += 1
-
-    return ans
+def solve(lines, diagonals):
+    cpc = get_covered_points_count(lines, diagonals)
+    return len([c for c in cpc.values() if c >= 2])
 
 
 if __name__ == "__main__":
-    coords = parse_input()
+    lines = parse_input()
 
-    print(f"part1: {solve(coords, True)}")
-    print(f"part2: {solve(coords, False)}")
+    print(f"part1: {solve(lines, diagonals=True)}")
+    print(f"part2: {solve(lines, diagonals=False)}")
