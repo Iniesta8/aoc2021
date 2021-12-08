@@ -23,47 +23,46 @@ def part1(entries):
 
 def part2(entries):
     ans = 0
-    result = [set() for i in range(10)]
+    result = {}
 
     for entry in entries:
-        patterns = entry[0]
+        patterns = [set(p) for p in entry[0]]
+        outputs = [set(v) for v in entry[1]]
 
         five_segments = []
         six_segments = []
         for pat in patterns:
             match len(pat):
-                case 2: result[1] = set(pat)
-                case 3: result[7] = set(pat)
-                case 4: result[4] = set(pat)
-                case 7: result[8] = set(pat)
-                case 5: five_segments.append(set(pat))
-                case 6: six_segments.append(set(pat))
+                case 2: result[1] = pat
+                case 3: result[7] = pat
+                case 4: result[4] = pat
+                case 7: result[8] = pat
+                case 5: five_segments.append(pat)
+                case 6: six_segments.append(pat)
 
         for s in six_segments:
             if not result[1].issubset(s):
-                result[6] = set(s)
+                result[6] = s
             elif result[4].issubset(s):
-                result[9] = set(s)
+                result[9] = s
             else:
-                result[0] = set(s)
+                result[0] = s
 
         for fs in five_segments:
             if result[1].issubset(fs):
-                result[3] = set(fs)
-            elif not set(fs).issubset(result[9]):
-                result[2] = set(fs)
+                result[3] = fs
+            elif not fs.issubset(result[9]):
+                result[2] = fs
             else:
-                result[5] = set(fs)
+                result[5] = fs
 
-        outputs = [set(vals) for vals in entry[1]]
-
-        output_str = ""
+        output = 0
         for outval in outputs:
-            for n, s in enumerate(result):
+            for n, s in result.items():
                 if s == outval:
-                    output_str += str(n)
+                    output = output * 10 + n
 
-        ans += int(output_str)
+        ans += output
 
     return ans
 
