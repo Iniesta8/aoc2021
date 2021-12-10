@@ -20,18 +20,18 @@ def parse_input():
 
 def board_won(board):
     for row in board:
-        if all([e == 'X' for e in row]):
+        if all(e == 'X' for e in row):
             return True
 
     for j in range(0, len(board[0])):
-        if all([row[j] == 'X' for row in board]):
+        if all(row[j] == 'X' for row in board):
             return True
 
     return False
 
 
 def calc_score(board, winning_num):
-    return sum([e for row in board for e in row if e != 'X']) * winning_num
+    return sum(e for row in board for e in row if e != 'X') * winning_num
 
 
 def mark_number(board, num):

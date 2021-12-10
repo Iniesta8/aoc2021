@@ -16,7 +16,7 @@ def parse_input():
 
 
 def get_covered_points_count(lines, diagonals):
-    cpc = dict()
+    cpc = {}
 
     for l in lines:
         src, dst = l[0], l[1]
