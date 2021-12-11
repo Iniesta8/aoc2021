@@ -11,24 +11,24 @@ adj_coords = [(-1, 0), (-1, -1), (0, -1), (1, -1),
 def step(grid):
     flashed = set()
     to_flash = []
-    for y in range(len(grid)):
-        for x in range(len(grid[0])):
-            grid[x][y] += 1
-            if grid[x][y] > 9:
-                to_flash.append((x, y))
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            grid[i][j] += 1
+            if grid[i][j] > 9:
+                to_flash.append((i, j))
 
     while len(to_flash) > 0:
         octo = to_flash.pop()
         for adj in adj_coords:
-            xi, yi = octo[0] + adj[0], octo[1] + adj[1]
-            if xi < 0 or xi > (len(grid[0])-1) or yi < 0 or yi > (len(grid) - 1):
+            ii, ji = octo[0] + adj[0], octo[1] + adj[1]
+            if ii < 0 or ii > (len(grid)-1) or ji < 0 or ji > (len(grid[0]) - 1):
                 continue
 
-            if (xi, yi) not in to_flash and (xi, yi) not in flashed:
-                grid[xi][yi] += 1
+            if (ii, ji) not in to_flash and (ii, ji) not in flashed:
+                grid[ii][ji] += 1
 
-                if grid[xi][yi] > 9:
-                    to_flash.append((xi, yi))
+                if grid[ii][ji] > 9:
+                    to_flash.append((ii, ji))
 
         grid[octo[0]][octo[1]] = 0
         flashed.add((octo[0], octo[1]))
