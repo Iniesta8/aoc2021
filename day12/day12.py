@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 
 
+from collections import defaultdict
+
+
 def parse_data():
-    graph = {}
+    graph = defaultdict(set)
 
     with open("./input") as f:
         for line in f.readlines():
             src, dst = line.strip().split("-")
-
-            dsts = graph.get(src, set())
-            dsts.add(dst)
-            graph[src] = dsts
-
-            srcs = graph.get(dst, set())
-            srcs.add(src)
-            graph[dst] = srcs
+            graph[src].add(dst)
+            graph[dst].add(src)
 
         return graph
 
