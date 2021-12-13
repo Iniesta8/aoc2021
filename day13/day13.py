@@ -21,22 +21,19 @@ def parse_data():
 
 def find_pos_after_fold(point, fold):
     line = fold[1]
+    x, y = point
     if fold[0] == "x":  # fold left
-        x, y = point
         if x < line:
             return point
         else:
-            d = x - 1 - line
-            xi = line - d - 1
-            return xi, y
+            x = 2 * line - x
+            return x, y
     else:  # fold up
-        x, y = point
         if y < line:
             return point
         else:
-            d = y - 1 - line
-            yi = line - d - 1
-            return x, yi
+            y = 2 * line - y
+            return x, y
 
 
 def do_fold(points, fold):
