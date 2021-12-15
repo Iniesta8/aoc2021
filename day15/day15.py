@@ -2,8 +2,6 @@
 
 import heapq
 
-adj_dirs = [(-1, 0), (0, -1), (1, 0), (0, 1)]
-
 
 def parse_input():
     with open("./input") as f:
@@ -14,39 +12,39 @@ def parse_input():
 
 
 def solve(grid, n):
-    rows = len(grid) * n
-    cols = len(grid[0]) * n
+    N = len(grid)
+    M = len(grid[0])
+    rows = N * n
+    cols = M * n
 
-    acc_risks = [[None for _ in range(cols)]
-                 for _ in range(rows)]
-    queue = [(0, (0, 0))]
+    costs = {}
+    pq = [(0, 0, 0)]
+    visited = set()
 
-    while queue:
-        acc_risk, (r, c) = heapq.heappop(queue)
+    def get_cost(r, c):
+        return ((grid[r % N][c % M] + (r // N) + (c // M)) - 1) % 9 + 1
 
-        if r < 0 or r >= rows or c < 0 or c >= cols:
+    while pq:
+        cost, r, c = heapq.heappop(pq)
+
+        if (r, c) in visited:
             continue
 
-        val = grid[r % len(grid)][c % len(grid)] + \
-            r // len(grid) + c // len(grid[0])
-        while val > 9:
-            val -= 9
-        new_risk = acc_risk + val
+        visited.add((r, c))
 
-        if acc_risks[r][c] is None or new_risk < acc_risks[r][c]:
-            acc_risks[r][c] = new_risk
-        else:
-            continue
+        costs[(r, c)] = cost
 
         if (r, c) == (rows - 1,  cols - 1):
             # distination reached
             break
 
-        for adj in adj_dirs:
-            rr, cc = r + adj[0], c + adj[1]
-            heapq.heappush(queue, (acc_risks[r][c], (rr, cc)))
+        for (dr, dc) in [(-1, 0), (0, -1), (1, 0), (0, 1)]:
+            rr, cc = r + dr, c + dc
+            if not (0 <= rr < rows and 0 <= cc < cols):
+                continue
+            heapq.heappush(pq, (cost + get_cost(rr, cc), rr, cc))
 
-    return acc_risks[rows - 1][cols - 1] - grid[0][0]
+    return costs[(rows - 1, cols - 1)]
 
 
 if __name__ == "__main__":
