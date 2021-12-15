@@ -13,28 +13,9 @@ def parse_input():
         return grid
 
 
-def expand_grid(grid, n):
-    rows = len(grid)
-    cols = len(grid[0])
-    new_grid = [[0 for _ in range(n * cols)]
-                for _ in range(n * rows)]
-
-    for r in range(len(new_grid)):
-        for c in range(len(new_grid[0])):
-            val = grid[r % rows][c % cols] + r // rows + c // cols
-            while val > 9:
-                val -= 9
-            new_grid[r][c] += val
-
-    return new_grid
-
-
 def solve(grid, n):
-    if n > 1:
-        grid = expand_grid(grid, n)
-
-    rows = len(grid)
-    cols = len(grid[0])
+    rows = len(grid) * n
+    cols = len(grid[0]) * n
 
     acc_risks = [[None for _ in range(cols)]
                  for _ in range(rows)]
@@ -46,7 +27,11 @@ def solve(grid, n):
         if r < 0 or r >= rows or c < 0 or c >= cols:
             continue
 
-        new_risk = acc_risk + grid[r][c]
+        val = grid[r % len(grid)][c % len(grid)] + \
+            r // len(grid) + c // len(grid[0])
+        while val > 9:
+            val -= 9
+        new_risk = acc_risk + val
 
         if acc_risks[r][c] is None or new_risk < acc_risks[r][c]:
             acc_risks[r][c] = new_risk
