@@ -66,8 +66,12 @@ def part2(boards, nums):
                     return calc_score(b, cur_num)
 
 
-if __name__ == "__main__":
+def main():
     nums, boards = parse_input()
 
     print(f"part1: {part1(boards, nums)}")
     print(f"part2: {part2(boards, nums)}")
+
+
+if __name__ == "__main__":
+    main()

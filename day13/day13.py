@@ -25,15 +25,14 @@ def find_pos_after_fold(point, fold):
     if fold[0] == "x":  # fold left
         if x < line:
             return point
-        else:
-            x = 2 * line - x
-            return x, y
-    else:  # fold up
-        if y < line:
-            return point
-        else:
-            y = 2 * line - y
-            return x, y
+        x = 2 * line - x
+        return x, y
+
+    # else fold up
+    if y < line:
+        return point
+    y = 2 * line - y
+    return x, y
 
 
 def do_fold(points, fold):
@@ -70,9 +69,13 @@ def part2(points, folds):
     print_points(new_points)
 
 
-if __name__ == "__main__":
+def main():
     points, folds = parse_data()
 
     print(f"part1: {part1(points, folds)}")
-    print(f"part2:")
+    print("part2:")
     part2(points, folds)
+
+
+if __name__ == "__main__":
+    main()

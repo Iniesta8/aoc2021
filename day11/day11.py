@@ -11,8 +11,8 @@ adj_coords = [(-1, 0), (-1, -1), (0, -1), (1, -1),
 def step(grid):
     flashed = set()
     to_flash = []
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
+    for i, row in enumerate(grid):
+        for j, _ in enumerate(row):
             grid[i][j] += 1
             if grid[i][j] > 9:
                 to_flash.append((i, j))
@@ -55,10 +55,14 @@ def part2(grid):
     return step_count
 
 
-if __name__ == "__main__":
+def main():
     with open("./input") as f:
         grid = [[int(level) for level in line.strip()]
                 for line in f.readlines()]
 
         print(f"part1: {part1(deepcopy(grid))}")
         print(f"part2: {part2(grid)}")
+
+
+if __name__ == "__main__":
+    main()

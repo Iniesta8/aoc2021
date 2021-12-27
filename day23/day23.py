@@ -35,7 +35,7 @@ def possible_next_states(top_row, rooms):
 
     # Outermost amphipod in a room moves to the top row
     for i in range(4):
-        if all([c == chars[i] or c == '.' for c in rooms[i]]):
+        if all(c in (chars[i], '.') for c in rooms[i]):
             continue
 
         # Find the index of the outermost amphipod
@@ -77,12 +77,12 @@ def possible_next_states(top_row, rooms):
         target_idx = chars.index(amphipod)
 
         # Check that all the amphipods in the destination room are correct
-        if not all([c == amphipod or c == '.' for c in rooms[target_idx]]):
+        if not all(c in [amphipod, '.'] for c in rooms[target_idx]):
             continue
 
         # Check if there is any other amphipod blocking the path to the room
         s = 1 if (room_indices[amphipod] - i) >= 0 else -1
-        if any([top_row[j] != '.' for j in range(i + s, room_indices[top_row[i]] + s, s)]):
+        if any(top_row[j] != '.' for j in range(i + s, room_indices[top_row[i]] + s, s)):
             continue
 
         # Find index of outermost amphipod (if any)
@@ -138,9 +138,13 @@ def solve(initial_rooms):
             heappush(pqueue, (energy + new_cost, new_top_row, new_rooms))
 
 
-if __name__ == "__main__":
+def main():
     initial_rooms_p1 = [list("CD"), list("AD"), list("BB"), list("CA")]
     initial_rooms_p2 = [list("CDDD"), list("ACBD"), list("BBAB"), list("CACA")]
 
     print(f"part1: {solve(initial_rooms_p1)}")
     print(f"part2: {solve(initial_rooms_p2)}")
+
+
+if __name__ == "__main__":
+    main()

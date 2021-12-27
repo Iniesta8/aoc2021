@@ -72,8 +72,12 @@ def part2(players):
     return max(count_wins((players[0].pos, players[1].pos)))
 
 
-if __name__ == "__main__":
+def main():
     players = parse_input()
 
     print(f"part1: {part1(deepcopy(players))}")
     print(f"part2: {part2(players)}")
+
+
+if __name__ == "__main__":
+    main()

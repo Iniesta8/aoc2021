@@ -58,8 +58,12 @@ def solve(target_area):
     return highest_y, len(results)
 
 
-if __name__ == "__main__":
+def main():
     target_area = parse_input()
 
     print(f"part1: {solve(target_area)[0]}")
     print(f"part2: {solve(target_area)[1]}")
+
+
+if __name__ == "__main__":
+    main()

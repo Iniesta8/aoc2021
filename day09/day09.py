@@ -64,8 +64,12 @@ def part2(floor):
     return math.prod(sorted(basin_sizes)[-3:])
 
 
-if __name__ == "__main__":
+def main():
     floor = parse_input()
 
     print(f"part1: {part1(floor)}")
     print(f"part2: {part2(floor)}")
+
+
+if __name__ == "__main__":
+    main()

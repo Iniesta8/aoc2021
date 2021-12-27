@@ -7,18 +7,12 @@ from copy import deepcopy
 def parse_input():
     with open("./input") as f:
         rows = f.readlines()
-    return [[c for c in r.strip()] for r in rows]
-
-
-def print_grid(grid):
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            print(grid[i][j], end="")
-        print()
+    return [list(r.strip()) for r in rows]
 
 
 def step(grid):
-    global N, M
+    N = len(grid)
+    M = len(grid[0])
     changed = False
 
     new_grid = deepcopy(grid)
@@ -53,10 +47,11 @@ def solve(grid):
     return step_count
 
 
-if __name__ == "__main__":
+def main():
     grid = parse_input()
 
-    N = len(grid)
-    M = len(grid[0])
-
     print(f"part1: {solve(grid)}")
+
+
+if __name__ == "__main__":
+    main()

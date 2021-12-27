@@ -47,8 +47,12 @@ def solve(grid, n):
     return costs[(rows - 1, cols - 1)]
 
 
-if __name__ == "__main__":
+def main():
     grid = parse_input()
 
     print(f"part1: {solve(grid, 1)}")
     print(f"part2: {solve(grid, 5)}")
+
+
+if __name__ == "__main__":
+    main()

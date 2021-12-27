@@ -57,9 +57,13 @@ def part2(data):
     return oxygen * co2
 
 
-if __name__ == "__main__":
+def main():
     with open("./input") as f:
         data = [l.strip() for l in f.readlines()]
 
     print(f"part1: {part1(data)}")
     print(f"part2: {part2(data)}")
+
+
+if __name__ == "__main__":
+    main()

@@ -27,9 +27,13 @@ def part2(init_pos):
     return best
 
 
-if __name__ == "__main__":
+def main():
     init_pos = parse_input()
     init_pos.sort()
 
     print(f"part1: {part1(init_pos)}")
     print(f"part2: {part2(init_pos)}")
+
+
+if __name__ == "__main__":
+    main()

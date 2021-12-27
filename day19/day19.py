@@ -134,13 +134,14 @@ def solve(scanners):
                 if overlap_info:
                     ori, common_beacons = overlap_info
                     print(
-                        f"Scanner {fixed_scanner.num} and scanner {not_fixed_scanner.num} have overlapping beacons")
+                        f"Scanner {fixed_scanner.num} and scanner" \
+                        f"{not_fixed_scanner.num} have overlapping beacons")
                     fixed_pos, new_pos = common_beacons.pop()
                     shift = calc_direction(fixed_pos, new_pos)
                     remove_scanner = not_fixed_scanner
                     new_fixed_scanner = Scanner(not_fixed_scanner.num, shift)
                     new_fixed_scanner.beacons = set(
-                        [calc_direction(shift, b) for b in ori.beacons])
+                        calc_direction(shift, b) for b in ori.beacons)
                     break
 
         if new_fixed_scanner:
@@ -164,10 +165,14 @@ def solve(scanners):
     return len(beacons), max_distance
 
 
-if __name__ == "__main__":
+def main():
     scanners = parse_input()
 
     num_beacons, max_scanner_distance = solve(scanners)
 
     print(f"part1: {num_beacons}")
     print(f"part2: {max_scanner_distance}")
+
+
+if __name__ == "__main__":
+    main()

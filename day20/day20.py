@@ -7,7 +7,7 @@ from collections import defaultdict
 def parse_input():
     with open("./input") as f:
         data = f.read().split("\n\n")
-        algorithm = [c for c in data[0].strip()]
+        algorithm = list(data[0].strip())
 
         input_image = defaultdict(lambda: '.')
         for i, l in enumerate(data[1].split("\n")):
@@ -74,8 +74,12 @@ def solve(image, algorithm, rounds):
     return count_lit_pixels(image)
 
 
-if __name__ == "__main__":
+def main():
     input_image, algorithm = parse_input()
 
     print(f"part1: {solve(input_image, algorithm, 2)}")
     print(f"part2: {solve(input_image, algorithm, 50)}")
+
+
+if __name__ == "__main__":
+    main()

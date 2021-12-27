@@ -25,8 +25,12 @@ def solve(initial_state, days):
     return sum(state)
 
 
-if __name__ == "__main__":
+def main():
     initial_state = parse_input()
 
     print(f"part1: {solve(initial_state, days=80)}")
     print(f"part2: {solve(initial_state, days=256)}")
+
+
+if __name__ == "__main__":
+    main()

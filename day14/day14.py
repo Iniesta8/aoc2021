@@ -42,8 +42,12 @@ def solve(template, rules, rounds):
     return mc[0][1] - lc[0][1]
 
 
-if __name__ == "__main__":
+def main():
     template, rules = parse_input()
 
     print(f"part1: {solve(template, rules, 10)}")
     print(f"part2: {solve(template, rules, 40)}")
+
+
+if __name__ == "__main__":
+    main()

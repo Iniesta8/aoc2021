@@ -104,9 +104,13 @@ def solve(reboot_steps, bounds=None):
     return count_cubes_by_state(cubes, "on")
 
 
-if __name__ == "__main__":
+def main():
     with open("./input") as f:
         reboot_steps = f.readlines()
 
     print(f"part1: {solve(reboot_steps, (-50, 50))}")
     print(f"part2: {solve(reboot_steps)}")
+
+
+if __name__ == "__main__":
+    main()

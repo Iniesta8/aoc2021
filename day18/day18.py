@@ -39,8 +39,7 @@ def try_split(num):
     if isinstance(num, int):
         if num >= 10:
             return [num//2, (num + 1)//2]
-        else:
-            return num
+        return num
 
     left = try_split(num[0])
     if left != num[0]:
@@ -84,8 +83,12 @@ def part2(nums):
     return max((magnitude(add(a, b)) for a, b in permutations(nums, 2)))
 
 
-if __name__ == "__main__":
+def main():
     numbers = parse_input()
 
     print(f"part1: {part1(numbers)}")
     print(f"part2: {part2(numbers)}")
+
+
+if __name__ == "__main__":
+    main()

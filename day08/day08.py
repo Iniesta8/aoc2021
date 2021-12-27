@@ -67,8 +67,12 @@ def part2(entries):
     return ans
 
 
-if __name__ == "__main__":
+def main():
     entries = parse_input()
 
     print(f"part1: {part1(entries)}")
     print(f"part2: {part2(entries)}")
+
+
+if __name__ == "__main__":
+    main()

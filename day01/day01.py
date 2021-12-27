@@ -16,9 +16,13 @@ def solve(depths, wsize):
     return ans
 
 
-if __name__ == "__main__":
+def main():
     with open("./input") as f:
         depths = [int(d) for d in f.readlines()]
 
     print(f"part1: {solve(depths, 1)}")
     print(f"part2: {solve(depths, 3)}")
+
+
+if __name__ == "__main__":
+    main()

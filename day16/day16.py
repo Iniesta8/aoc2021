@@ -29,8 +29,7 @@ class BITS_Decoder:
             type_id = int(self.fetch(3), 2)
             if type_id == 4:
                 return self.decode_literal_value()
-            else:
-                return self.decode_operator(type_id)
+            return self.decode_operator(type_id)
 
     def decode_literal_value(self):
         val = ""
@@ -74,8 +73,12 @@ def decode_transmission(data):
     return decoder.version_sum, val
 
 
-if __name__ == "__main__":
+def main():
     data = parse_input()
 
     print(f"part1: {decode_transmission(data)[0]}")
     print(f"part2: {decode_transmission(data)[1]}")
+
+
+if __name__ == "__main__":
+    main()

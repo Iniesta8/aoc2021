@@ -50,9 +50,13 @@ def solve(lines):
     return error_score, sorted(compl_scores)[mid]
 
 
-if __name__ == "__main__":
+def main():
     with open("./input") as f:
         lines = [line.strip() for line in f.readlines()]
 
         print(f"part1: {solve(lines)[0]}")
         print(f"part2: {solve(lines)[1]}")
+
+
+if __name__ == "__main__":
+    main()

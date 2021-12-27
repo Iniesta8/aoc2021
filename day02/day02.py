@@ -6,13 +6,13 @@ def part1(commands):
     depth = 0
     for c in commands:
         val = int(c[1])
-        dir = c[0]
+        d = c[0]
 
-        if dir == "forward":
+        if d == "forward":
             hpos += val
-        elif dir == "down":
+        elif d == "down":
             depth += val
-        elif dir == "up":
+        elif d == "up":
             depth -= val
 
     return hpos * depth
@@ -24,22 +24,26 @@ def part2(commands):
     aim = 0
     for c in commands:
         val = int(c[1])
-        dir = c[0]
+        d = c[0]
 
-        if dir == "forward":
+        if d == "forward":
             hpos += val
             depth += aim * val
-        elif dir == "down":
+        elif d == "down":
             aim += val
-        elif dir == "up":
+        elif d == "up":
             aim -= val
 
     return hpos * depth
 
 
-if __name__ == "__main__":
+def main():
     with open("./input") as f:
         commands = [list(l.strip().split(" ")) for l in f.readlines()]
 
     print(f"part1: {part1(commands)}")
     print(f"part2: {part2(commands)}")
+
+
+if __name__ == "__main__":
+    main()

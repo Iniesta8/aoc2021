@@ -44,8 +44,12 @@ def solve(lines, diagonals):
     return len([c for c in cpc.values() if c >= 2])
 
 
-if __name__ == "__main__":
+def main():
     lines = parse_input()
 
     print(f"part1: {solve(lines, diagonals=True)}")
     print(f"part2: {solve(lines, diagonals=False)}")
+
+
+if __name__ == "__main__":
+    main()

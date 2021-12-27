@@ -101,7 +101,7 @@ if __name__ == "__main__":
     instructions = parse_input()
 
     part1()
-    part2()
-
     print(f"part1: {max_model_num}")
+
+    part2()
     print(f"part2: {min_model_num}")
